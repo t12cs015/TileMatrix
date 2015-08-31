@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <cstdlib>
 #include "Matrix.hpp"
 
 
@@ -18,7 +19,7 @@
  */
 Matrix::Matrix( const unsigned int m, const unsigned int n )
 {
-	std::cout << "Matrix()\n";
+//	std::cout << "Matrix()\n";
 
 	assert( m > 0 );
 	assert( n > 0 );
@@ -27,8 +28,14 @@ Matrix::Matrix( const unsigned int m, const unsigned int n )
 	n_ = n;
 	top_ = new double[ m*n ];
 
-	for (unsigned int i=0; i<m*n; i++)
-		top_[i] = 0.0;
+	if (top_ == NULL)
+	{
+		std::cerr << "Can't allocate memory space for Matrix class¥n";
+		exit(EXIT_FAILURE);
+	}
+	else
+		for (unsigned int i=0; i<m_*n_; i++)
+			top_[i] = 0.0;
 }
 
 /**
@@ -37,8 +44,9 @@ Matrix::Matrix( const unsigned int m, const unsigned int n )
  */
 Matrix::~Matrix()
 {
-	std::cout << "~Matrix()\n";
-	delete[] top_;
+//	std::cout << "~Matrix()\n";
+	if (top_ != NULL)
+		operator delete[] (top_);
 }
 
 /**

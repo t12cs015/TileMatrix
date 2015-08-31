@@ -11,7 +11,7 @@ $(LIBS):	$(LOBJS)
 	$(AR) r $(LIBS) $(LOBJS)
 	ranlib $(LIBS)
 
-$(TARGET):	TileMatrixTest.o
+$(TARGET):	TileMatrixTest.o $(LIBS)
 	$(CXX) $(CXXFLAGS) -o $@ TileMatrixTest.o $(LIBS)
 
 all:	$(LIBS) $(TARGET)

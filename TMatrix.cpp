@@ -32,13 +32,19 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
 
 	top_ = new BMatrix* [ p_ * q_ ];
 
-	for (unsigned int i=0; i<p_; i++)
-		for (unsigned int j=0; j<q_; j++)
-		{
-			unsigned int tm = ( i != p_-1 ) ? mb_ : M_ - i * mb_;
-		    unsigned int tn = ( j != q_-1 ) ? nb_ : N_ - j * nb_;
-		      top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
-		}
+	if (top_ == NULL)
+	{
+		std::cerr << "Can't allocate memory space for TMatrix class¥n";
+		exit(EXIT_FAILURE);
+	}
+	else
+		for (unsigned int i=0; i<p_; i++)
+			for (unsigned int j=0; j<q_; j++)
+			{
+				unsigned int tm = ( i != p_-1 ) ? mb_ : M_ - i * mb_;
+				unsigned int tn = ( j != q_-1 ) ? nb_ : N_ - j * nb_;
+				top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
+			}
 }
 
 /**
@@ -51,7 +57,11 @@ TMatrix::~TMatrix()
 
 	for (unsigned int i=0; i<p_; i++)
 		for (unsigned int j=0; j<q_; j++)
-			delete [] top_[ i + j * p_ ];
+		{
+//			std::cout << "(" << i << "," << j << ")" << std::endl;
+			operator delete [] (top_[ i + j * p_ ]);
+		}
+	operator delete [] (top_);
 }
 
 /**
