@@ -19,6 +19,9 @@ public:
 	// Constructor
 	Matrix( const unsigned int m, const unsigned int n );
 
+	// Copy constructor
+	Matrix( const Matrix& T );
+
 	// Destructor
 	virtual ~Matrix();
 
@@ -27,10 +30,29 @@ public:
 	unsigned int m() const { return m_; }
 	unsigned int n() const { return n_; }
 
+	// Assign random numbers to the elements
+	void Set_Rnd( const unsigned seed );
+
+	// Set matrix to the identity matrix
+	void Set_Iden();
+
+	// Set matrix to the zero matrix
+	void Set_Zero();
+
+	// Assign the value to (i,j) element
+	void Set_Val( const unsigned int i, const unsigned int j, const double val );
+
+	// Show elements to the standard output
+	void Show_all() const;
+
 	// Operator overload
 	Matrix &operator=( const Matrix& T );
 	double &operator[]( const unsigned int i ) const;
 	double &operator()( const unsigned int i, const unsigned int j ) const;
+
+	// Save matrix elements to the file
+	void File_Out( const char* fname );
+	void File_Out( const char* fname, const unsigned dig );
 };
 
 #endif /* MATRIX_HPP_ */

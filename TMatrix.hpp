@@ -27,6 +27,9 @@ public:
 			const unsigned int mb, const unsigned int nb,
 			const unsigned int ib );
 
+	// Copy COnstructor
+	TMatrix( const TMatrix& T );
+
 	// Destructor
 	virtual ~TMatrix();
 
@@ -38,8 +41,21 @@ public:
 	unsigned int p()  const { return p_; }
 	unsigned int q()  const { return q_; }
 
+	// Assign random numbers to the elements
+	void Set_Rnd( const unsigned seed );
+
+	// Set matrix to the identity matrix
+	void Set_Iden();
+
+	// Set matrix to the zero matrix
+	void Set_Zero();
+
 	// Operator overload
 	BMatrix* operator()( const unsigned int i, const unsigned int j ) const;
+
+	// Save matrix elements to the file
+	void File_Out( const char* fname );
+	void File_Out( const char* fname, const unsigned dig );
 };
 
 #endif /* TMATRIX_HPP_ */
