@@ -9,6 +9,8 @@
 #include <cassert>
 #include "BMatrix.hpp"
 
+using namespace std;
+
 /**
  * Constructor
  *
@@ -17,7 +19,7 @@
  */
 BMatrix::BMatrix( const unsigned int m, const unsigned int n, const unsigned int ib ) : Matrix(m,n)
 {
-//	std::cout << "BMatrix()\n";
+//	cout << "BMatrix()\n";
 
 	assert( ib > 0 );
 	assert( ib < m );
@@ -31,5 +33,5 @@ BMatrix::BMatrix( const unsigned int m, const unsigned int n, const unsigned int
  */
 BMatrix::~BMatrix()
 {
-//	std::cout << "~BMatrix()\n";
+//	cout << "~BMatrix()\n";
 }

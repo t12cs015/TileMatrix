@@ -7,8 +7,9 @@
 
 #include <cassert>
 #include <iostream>
-
 #include "TMatrix.hpp"
+
+using namespace std;
 
 /**
  * Constructor
@@ -30,21 +31,23 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
 	p_ = M_ % mb_ == 0 ? M_ / mb_ : M_ / mb_ + 1;
 	q_ = N_ % nb_ == 0 ? N_ / nb_ : N_ / nb_ + 1;
 
-	top_ = new BMatrix* [ p_ * q_ ];
-
-	if (top_ == NULL)
+	try
 	{
-		std::cerr << "Can't allocate memory space for TMatrix class¥n";
+		top_ = new BMatrix* [ p_ * q_ ];
+	}
+	catch (bad_alloc &ex)
+	{
+		cerr << "Can't allocate memory space for TMatrix class: " << ex.what() << endl;
 		exit(EXIT_FAILURE);
 	}
-	else
-		for (unsigned int i=0; i<p_; i++)
-			for (unsigned int j=0; j<q_; j++)
-			{
-				unsigned int tm = ( i != p_-1 ) ? mb_ : M_ - i * mb_;
-				unsigned int tn = ( j != q_-1 ) ? nb_ : N_ - j * nb_;
-				top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
-			}
+
+	for (unsigned int i=0; i<p_; i++)
+		for (unsigned int j=0; j<q_; j++)
+		{
+			unsigned int tm = ( i != p_-1 ) ? mb_ : M_ - i * mb_;
+			unsigned int tn = ( j != q_-1 ) ? nb_ : N_ - j * nb_;
+			top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
+		}
 }
 
 /**
@@ -53,15 +56,15 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
  */
 TMatrix::~TMatrix()
 {
-	std::cout << "~TMatrix()\n";
+	cout << "~TMatrix()\n";
 
 	for (unsigned int i=0; i<p_; i++)
 		for (unsigned int j=0; j<q_; j++)
 		{
-//			std::cout << "(" << i << "," << j << ")" << std::endl;
+			cout << "(" << i << "," << j << "):  ";
 			operator delete [] (top_[ i + j * p_ ]);
 		}
-	operator delete [] (top_);
+	delete [] top_;
 }
 
 /**
