@@ -16,6 +16,9 @@ protected:
 	unsigned int ib_;	// block size
 
 public:
+	// Default constructor
+	BMatrix();
+
 	// Constructor
 	BMatrix( const unsigned int m, const unsigned int n, const unsigned int ib );
 

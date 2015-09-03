@@ -1,5 +1,5 @@
 CXX = /usr/local/bin/g++
-CXXFLAGS = -g -Wall
+CXXFLAGS = -g -Wall -DDEBUG
 
 LOBJS =		Matrix.o BMatrix.o TMatrix.o
 

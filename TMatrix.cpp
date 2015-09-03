@@ -5,10 +5,12 @@
  *      Author: stomo
  */
 
-#include <cassert>
 #include <iostream>
-
+#include <cstdlib>
+#include <cassert>
 #include "TMatrix.hpp"
+
+using namespace std;
 
 /**
  * Constructor
@@ -20,6 +22,10 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
 		const unsigned int mb, const unsigned int nb,
 		const unsigned int ib )
 {
+#ifdef DEBUG
+	cout << "TMatrix(M,N,mb,nb,ib)\n";
+#endif
+
 	assert( M > 0 && N > 0 && mb > 0 && nb > 0 && ib > 0);
 	assert( mb < M && nb < N && ib < nb );
 
@@ -53,7 +59,9 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
  */
 TMatrix::~TMatrix()
 {
-	std::cout << "~TMatrix()\n";
+#ifdef DEBUG
+	cout << "~TMatrix()\n";
+#endif
 
 	for (unsigned int i=0; i<p_; i++)
 		for (unsigned int j=0; j<q_; j++)

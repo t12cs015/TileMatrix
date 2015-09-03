@@ -6,8 +6,23 @@
  */
 
 #include <iostream>
+#include <cstdlib>
 #include <cassert>
 #include "BMatrix.hpp"
+
+using namespace std;
+
+/**
+ * Default constructor
+ */
+BMatrix::BMatrix() : Matrix()
+{
+#ifdef DEBUG
+	cout << "BMatrix()\n";
+#endif
+
+	ib_ = 0;
+}
 
 /**
  * Constructor
@@ -17,7 +32,9 @@
  */
 BMatrix::BMatrix( const unsigned int m, const unsigned int n, const unsigned int ib ) : Matrix(m,n)
 {
-//	std::cout << "BMatrix()\n";
+#ifdef DEBUG
+	cout << "BMatrix(m,n,ib)\n";
+#endif
 
 	assert( ib > 0 );
 	assert( ib < m );
@@ -31,5 +48,7 @@ BMatrix::BMatrix( const unsigned int m, const unsigned int n, const unsigned int
  */
 BMatrix::~BMatrix()
 {
-//	std::cout << "~BMatrix()\n";
+#ifdef DEBUG
+	cout << "~BMatrix()\n";
+#endif
 }

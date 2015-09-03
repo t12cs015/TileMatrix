@@ -6,8 +6,8 @@
  */
 
 #include <iostream>
-#include <cassert>
 #include <cstdlib>
+#include <cassert>
 #include "Matrix.hpp"
 
 using namespace std;
@@ -60,7 +60,10 @@ Matrix::Matrix( const unsigned int m, const unsigned int n )
  */
 Matrix::~Matrix()
 {
-//	std::cout << "~Matrix()\n";
+#ifdef DEBUG
+	cout << "~Matrix()\n";
+#endif
+
 	if (top_ != NULL)
 		operator delete[] (top_);
 }
