@@ -30,7 +30,7 @@ int main( int argc, char* argv[] )
 	cout << "BMatrix block start" << endl;
 	cout << endl << "TMatrix block end" << endl;
 	{
-		TMatrix A(20,20,10,10,5);
+		TMatrix A(20,18,10,10,5);
 		cout << "M = " << A.M() << ", n = " << A.N() << ", mb = " << A.mb() << ", nb = " << A.nb();
 		cout << ", p = " << A.p() << ", q = " << A.q() << endl;
 	}

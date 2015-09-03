@@ -51,8 +51,21 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
 		{
 			unsigned int tm = ( i != p_-1 ) ? mb_ : M_ - i * mb_;
 			unsigned int tn = ( j != q_-1 ) ? nb_ : N_ - j * nb_;
-			top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
-			cout << "top_[" << i + j * p_ << "] = " << &top_[ i + j * p_ ] << endl;
+			try
+			{
+				top_[ i + j * p_ ] = new BMatrix( tm, tn, ib );
+			}
+			catch (char* eb)
+			{
+				cerr << "Can't allocate memory space for TMatrix class: " << eb << endl;
+				exit(EXIT_FAILURE);
+			}
+#ifdef DEBUG
+			cout << "BMatrix(" << (top_[ i + j * p_ ])->m() << ",";
+			cout << (top_[ i + j * p_ ])->n() << ",";
+			cout << (top_[ i + j * p_ ])->ib() << ")\n";
+//			cout << "top_[" << i + j * p_ << "] = " << &top_[ i + j * p_ ] << endl;
+#endif
 		}
 }
 
@@ -63,14 +76,19 @@ TMatrix::TMatrix( const unsigned int M, const unsigned int N,
 TMatrix::~TMatrix()
 {
 #ifdef DEBUG
-	cout << "~TMatrix()\n";
+	cout << "\n~TMatrix()\n";
 #endif
 
 	for (unsigned int j=0; j<q_; j++)
 		for (unsigned int i=0; i<p_; i++)
 		{
-			cout << "top_[" << i + j * p_ << "] = " << &top_[ i + j * p_ ] << endl;
-			delete [] (top_[ i + j * p_ ]);
+#ifdef DEBUG
+			cout << "BMatrix(" << (top_[ i + j * p_ ])->m() << ",";
+			cout << (top_[ i + j * p_ ])->n() << ",";
+			cout << (top_[ i + j * p_ ])->ib() << ")\n";
+//			cout << "top_[" << i + j * p_ << "] = " << &top_[ i + j * p_ ] << endl;
+#endif
+			delete top_[ i + j * p_ ];
 		}
 	delete [] top_;
 }
