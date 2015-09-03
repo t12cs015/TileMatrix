@@ -16,6 +16,9 @@ protected:
 	unsigned int n_;	// number of columns of the matrix
 
 public:
+	// Default constructor
+	Matrix();
+
 	// Constructor
 	Matrix( const unsigned int m, const unsigned int n );
 

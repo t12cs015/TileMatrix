@@ -10,6 +10,20 @@
 #include <cstdlib>
 #include "Matrix.hpp"
 
+using namespace std;
+
+/**
+ * Default constructor
+ */
+Matrix::Matrix()
+{
+#ifdef DEBUG
+	cout << "Matrix()\n";
+#endif
+
+	m_ = n_ = 0;
+	top_ = NULL;
+}
 
 /**
  * Constructor
@@ -19,14 +33,21 @@
  */
 Matrix::Matrix( const unsigned int m, const unsigned int n )
 {
-//	std::cout << "Matrix()\n";
+#ifdef DEBUG
+	cout << "Matrix(m,n)\n";
+#endif
 
 	assert( m > 0 );
 	assert( n > 0 );
 
 	m_ = m;
 	n_ = n;
-	top_ = new double[ m*n ];
+
+	try
+	{
+		top_ = new double[ m*n ];
+	}
+	catch ()
 
 	if (top_ == NULL)
 	{
