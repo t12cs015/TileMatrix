@@ -45,18 +45,13 @@ Matrix::Matrix( const unsigned int m, const unsigned int n )
 
 	try
 	{
-		top_ = new double[ m*n ];
+		top_ = new double[ m_ * n_ ];
 	}
-	catch ()
-
-	if (top_ == NULL)
+	catch (char *eb)
 	{
-		std::cerr << "Can't allocate memory space for Matrix class¥n";
+		cerr << "Can't allocate memory space for Matrix class: " << eb << endl;
 		exit(EXIT_FAILURE);
 	}
-	else
-		for (unsigned int i=0; i<m_*n_; i++)
-			top_[i] = 0.0;
 }
 
 /**
