@@ -64,8 +64,7 @@ Matrix::~Matrix()
 	cout << "~Matrix()\n";
 #endif
 
-	if (top_ != NULL)
-		operator delete[] (top_);
+	delete [] top_;
 }
 
 /**
